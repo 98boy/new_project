@@ -1,26 +1,33 @@
 /* 
 应用的所有路由配置的数组
 */
-import Home from '../pages/Home'
-import Search from '../pages/Search'
-import Register from '../pages/Register'
-import Login from '../pages/Login'
+import Home from "../pages/Home";
+import Search from "../pages/Search";
+import Register from "../pages/Register";
+// import Login from '../pages/Login'
+import Login from "@/pages/Login";
 
-export default [
-  {
-    path: '/',
-    component: Home
+export default [{
+    path: "/",
+    component: Home,
   },
   {
-    path: '/search',
-    component: Search
+    name: 'search',
+    path: "/search/:keyword?",
+    component: Search,
   },
   {
-    path: '/register',
-    component: Register
+    path: "/register",
+    component: Register,
+    meta: {
+      isHideFooter: true
+    }
   },
   {
-    path: '/login',
-    component: Login
+    path: "/login",
+    component: Login,
+    meta: {
+      isHideFooter: true
+    }
   },
-]
+];
