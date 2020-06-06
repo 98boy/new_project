@@ -65,15 +65,15 @@ export default {
         location.params = { keyword };
         location.query = { keyword2: keyword.toUpperCase() };
       }
-      //   this.$router.push(location);
+      this.$router.push(location);
       //   this.$router.push(location, () => {
       //     //   vue-router3.1.0版本 （内部不会抛出错误的promise）
       //     console.log("跳转成功");
       //   });
       // vue-router新语法 返回的是promise
-      this.$router.push(location).catch(() => {
-        console.log("出错了");
-      });
+      // this.$router.push(location).catch(() => {
+      //   console.log("出错了");
+      // });
     }
   }
 };
