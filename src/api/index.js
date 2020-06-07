@@ -19,4 +19,4 @@ export function reqLogin(mobile, password) {
   })
 }
 // 首页三级分类
-export const reqCategorys = () => ajax('/product/getBaseCategoryList')
+export const reqCategorysList = () => ajax('/product/getBaseCategoryList')

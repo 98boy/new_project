@@ -103,6 +103,10 @@ a {
   color: #666;
 }
 
+a:hover {
+  color: rgb(79, 76, 212) !important;
+
+}
 
 /* 重置表单元素 */
 legend {
@@ -146,10 +150,7 @@ html {
   overflow-y: scroll;
 }
 
-a:link:hover {
-  color: rgb(79, 76, 212) !important;
-  text-decoration: underline;
-}
+
 
 /* 清除浮动 */
 .clearfix::after {

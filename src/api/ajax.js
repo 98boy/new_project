@@ -9,13 +9,13 @@ const instance = axios.create({
   timeout: 1500
 })
 // 请求拦截器  请求发送前执行
-axios.interceptors.request.use(config => {
+instance.interceptors.request.use(config => {
   // 显示请求进度条
   NProgress.start()
   return config
 })
 // 响应拦截器
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   // 请求成功
   response => {
     // 隐藏请求进度条
