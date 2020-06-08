@@ -6,7 +6,7 @@
     <Rank />
     <Like />
     <Floor />
-    <Brand />
+    <Floor /><Brand / >
   </div>
 </template>
 
@@ -27,6 +27,10 @@ export default {
     Like,
     Floor,
     Brand
+  },
+  mounted() {
+    // 分发给异步action获取楼层数据
+    this.$store.dispatch("getFloors");
   }
 };
 </script>

@@ -63,8 +63,9 @@ export default {
       const location = { name: "search" };
       if (keyword) {
         location.params = { keyword };
-        location.query = { keyword2: keyword.toUpperCase() };
       }
+      // 若当前路由有 category1Id,category2Id,category3Id，携带上
+      location.query = this.$route.query;
       this.$router.push(location);
       //   this.$router.push(location, () => {
       //     //   vue-router3.1.0版本 （内部不会抛出错误的promise）

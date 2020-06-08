@@ -44,7 +44,7 @@
               <img src="./images/floor-1-1.png" />
             </div>
             <div class="floorBanner">
-              <div class="swiper-container" id="floor1Swiper">
+              <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
                     <img src="./images/floor-1-b01.png" />
