@@ -2,15 +2,17 @@
   <div>
     <TypeNav />
     <ListContainer />
-    <TodayRecommend />
+    <TodayRecommend :todays="todays" />
     <Rank />
     <Like />
-    <Floor />
-    <Floor /><Brand / >
+    <Floor v-for="floor in floors" :key="floor.id" :floor="floor" />
+
+    <Brand />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ListContainer from "./ListContainer/ListContainer";
 import TodayRecommend from "./TodayRecommend/TodayRecommend";
 import Rank from "./Rank/Rank";
@@ -20,6 +22,10 @@ import Brand from "./Brand/Brand";
 
 export default {
   name: "Home",
+  computed: {
+    ...mapState({ floors: state => state.home.floors }),
+    ...mapState({ todays: state => state.home.today })
+  },
   components: {
     ListContainer,
     TodayRecommend,
@@ -31,6 +37,8 @@ export default {
   mounted() {
     // 分发给异步action获取楼层数据
     this.$store.dispatch("getFloors");
+    this.$store.dispatch("getBanners");
+    this.$store.dispatch("getToday");
   }
 };
 </script>

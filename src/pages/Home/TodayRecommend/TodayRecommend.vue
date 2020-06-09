@@ -4,21 +4,12 @@
       <ul class="recommend">
         <li class="clock">
           <div class="time">
-            <img src="./images/clock.png" />
+            <img :src="todays.imgUrl" />
             <h3>今日推荐</h3>
           </div>
         </li>
-        <li class="banner">
-          <img src="./images/today01.png" />
-        </li>
-        <li class="banner">
-          <img src="./images/today02.png" />
-        </li>
-        <li class="banner">
-          <img src="./images/today03.png" />
-        </li>
-        <li class="banner">
-          <img src="./images/today04.png" />
+        <li class="banner" v-for="item in todays.banner" :key="item.id">
+          <img :src="item.imgUrl" />
         </li>
       </ul>
     </div>
@@ -27,8 +18,11 @@
 
 <script>
 export default {
-  name: 'TodayRecommend',
-}
+  name: "TodayRecommend",
+  props: {
+    todays: Object
+  }
+};
 </script>
 
 <style  lang="less" scoped>
