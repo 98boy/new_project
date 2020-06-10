@@ -49,6 +49,11 @@ export default {
       keyword: ""
     };
   },
+  mounted() {
+    this.$bus.$on("removeKeyword", () => {
+      this.keyword = "";
+    });
+  },
   methods: {
     search() {
       const { keyword } = this;
@@ -66,7 +71,13 @@ export default {
       }
       // 若当前路由有 category1Id,category2Id,category3Id，携带上
       location.query = this.$route.query;
-      this.$router.push(location);
+      // if (this.$route.name !== "search") {
+      if ((this.$route.path.indexOf !== "/search") !== 0) {
+        this.$router.push(location);
+      } else {
+        this.$router.replace(location);
+      }
+
       //   this.$router.push(location, () => {
       //     //   vue-router3.1.0版本 （内部不会抛出错误的promise）
       //     console.log("跳转成功");

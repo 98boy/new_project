@@ -1,7 +1,7 @@
 <template>
   <div class="type-nav">
     <div class="container">
-      <div @mouseleave="hideSubCategorys" @mouseenter="showCategtoyFirst">
+      <div @mouseleave="hideSubCategorys" @mouseenter="showFirstCategorys">
         <h2 class="all">全部商品分类</h2>
         <transition name="move">
           <div class="sort" v-show="isShowFirst">
@@ -119,7 +119,7 @@ export default {
     ...mapActions(["getCategorysList"]),
 
     // 显示一级分类列表
-    showCategtoyFirst() {
+    showFirstCategorys() {
       (this.isShowFirst = true),
         // 子分类列表可一改变为特定下标
         (this.currentIndex = -1);
@@ -196,20 +196,24 @@ export default {
       } else if (category3id) {
         query.category3Id = category3id;
       }
-
-      // 取出当前params中得keyword，有值就携带
-      const keyword = this.$route.params.keyword;
-      if (keyword) {
-        location.params = { keyword };
-      }
       // 准备跳转路由的location
       const location = {
         name: "search",
         query
       };
+      // 取出当前params中得keyword，有值就携带
+      const keyword = this.$route.params.keyword;
+      if (keyword) {
+        location.params = { keyword };
+      }
 
       // 跳转到Search
-      this.$router.push(location);
+      // if (this.$route.name !== "search") {
+      if ((this.$route.path.indexOf !== "/search") !== 0) {
+        this.$router.push(location);
+      } else {
+        this.$router.replace(location);
+      }
       // 自动隐藏列表
       this.hideSubCategorys();
     }
