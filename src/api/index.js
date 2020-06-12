@@ -22,6 +22,11 @@ export function reqLogin(mobile, password) {
 export const reqCategorysList = () => ajax("/product/getBaseCategoryList");
 // 搜索商品
 export const reqProductList = (options) => ajax.post("/list", options);
+// 商品详情
+export const reqDetailInfo = (skuId) => ajax.get(`/item/${skuId}`);
+// 加入购物车
+export const reqAddToCart = (skuId, skuNum) =>
+  ajax.post(`/cart/addToCart/${skuId}/${skuNum}`);
 
 // 定义访问mock接口的接口请求函数
 export const reqBanners = () => mockAjax("/banners");
