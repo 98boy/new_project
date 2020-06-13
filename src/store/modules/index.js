@@ -3,12 +3,12 @@ import search from "./search";
 import home from "./home";
 import user from "./user";
 import detail from "./detail";
-import cart from "./cart";
+import shopcart from "./shopcart";
 
 export default {
   search,
   home,
   user,
   detail,
-  cart,
+  shopcart,
 };

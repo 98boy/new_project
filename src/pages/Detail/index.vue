@@ -377,10 +377,21 @@ export default {
     //   // 方法1 异步添加到购物车
     //   this.$store.dispatch("addToCart", {
     //     skuId,
-    //     skuNum
-    //     // callback: this.callback
+    //     skuNum,
+    //     callback: this.callback
     //   });
     // },
+    // 异步action结束时自动调用
+    // callback(errorMsg) {
+    //   if (errorMsg) {
+    //     alert(errorMsg);
+    //   } else {
+    //     // 将商品的skuInfo数据json文件保存到sessionStorage
+    //     window.sessionStorage.setItem("skuInfo", JSON.stringify(this.skuInfo));
+    //     // 跳转路由
+    //     this.$router.push({ path: "/addcartsuccess", query: { skuNum } });
+    //   }
+    // }
     // 方法2  利用dispatch的promise的返回值
     async addToCart() {
       const skuId = this.$route.params.id;
@@ -391,23 +402,17 @@ export default {
       // });
       try {
         await this.$store.dispatch("addToCart3", { skuId, skuNum });
-        alert("成功");
+        this.$router.push({ path: "/addcartsuccess", query: { skuNum } });
       } catch (error) {
         alert(error.message);
       }
+      //   this.$store.dispatch("/shopcart");
       // if (errorMsg) {
       //   alert(errorMsg);
       // } else {
-      //   alert("成功");
+      //  this.$router.push("/addcartsuccess");
       // }
-    },
-    // 异步action结束时自动调用
-    callback(errorMsg) {
-      if (errorMsg) {
-        alert(errorMsg);
-      } else {
-        alert("00");
-      }
+      // },
     }
   }
 };
