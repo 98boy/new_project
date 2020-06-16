@@ -34,7 +34,11 @@ export const reqCheckItem = (skuId, isCheck) =>
   ajax.get(`/cart/checkCart/${skuId}/${isCheck}`);
 // 删除购物项商品
 export const reqDeleteItem = (skuId) => ajax.delete(`cart/deleteCart/${skuId}`);
-
+// 注册用户
+export const reqRegister = (userInfo) =>
+  ajax.post("/user/passport/register", userInfo);
+// 退出登录
+export const reqLogout = () => ajax.get("./user/passport/logout");
 // 定义访问mock接口的接口请求函数
 export const reqBanners = () => mockAjax("/banners");
 export const reqFloors = () => mockAjax("/floors");

@@ -371,48 +371,60 @@ export default {
       value.isChecked = "1";
     },
     // 加入购物车
-    // async addToCart() {
-    //   const skuId = this.$route.params.id;
-    //   const skuNum = this.skuNum;
-    //   // 方法1 异步添加到购物车
-    //   this.$store.dispatch("addToCart", {
-    //     skuId,
-    //     skuNum,
-    //     callback: this.callback
-    //   });
-    // },
-    // 异步action结束时自动调用
-    // callback(errorMsg) {
-    //   if (errorMsg) {
-    //     alert(errorMsg);
-    //   } else {
-    //     // 将商品的skuInfo数据json文件保存到sessionStorage
-    //     window.sessionStorage.setItem("skuInfo", JSON.stringify(this.skuInfo));
-    //     // 跳转路由
-    //     this.$router.push({ path: "/addcartsuccess", query: { skuNum } });
-    //   }
-    // }
-    // 方法2  利用dispatch的promise的返回值
     async addToCart() {
-      const skuId = this.$route.params.id;
+      // 收集数据
       const skuNum = this.skuNum;
-      // const errorMsg = await this.$store.dispatch("addToCart2", {
-      //   skuId,
-      //   skuNum
-      // });
-      try {
-        await this.$store.dispatch("addToCart3", { skuId, skuNum });
+      const skuId = this.$route.params.id;
+      // dispatch()
+      // 方式一: 使用回调函数数据
+      // this.$store.dispatch('addToCart', {skuNum, skuId, callback: this.callback})
+      // this.$store.dispatch('addToCart', {skuNum: undefined, skuId: undefined, callback: this.callback})
+
+      // 方式二: 利用dispatch()的返回值是promise
+      /* const promise = this.$store.dispatch('addToCart2', {skuNum, skuId})
+        console.log('-----', promise)
+        promise.then(() => { // 成功
+          this.$router.push('/addcartsuccess')
+        }).catch(error => { // 失败
+          alert(error.message)
+        }) */
+
+      /* try {
+          await this.$store.dispatch('addToCart2', {skuNum, skuId})
+          this.$router.push('/addcartsuccess')
+        } catch (error) {
+          alert(error.message)
+        } */
+
+      const errorMsg = await this.$store.dispatch("addToCart3", {
+        skuNum,
+        skuId
+      });
+      if (errorMsg) {
+        // 失败
+        alert(errorMsg);
+      } else {
+        // 成功
+
+        // 将当前商品的skuInfo的json文本保存到sessionStorage中
+        window.sessionStorage.setItem("skuInfo", JSON.stringify(this.skuInfo));
+        // 跳转路由, 携带skuNum的query参数
         this.$router.push({ path: "/addcartsuccess", query: { skuNum } });
-      } catch (error) {
-        alert(error.message);
       }
-      //   this.$store.dispatch("/shopcart");
-      // if (errorMsg) {
-      //   alert(errorMsg);
-      // } else {
-      //  this.$router.push("/addcartsuccess");
-      // }
-      // },
+    },
+
+    /* 
+      在异步action执行成功或失败后, 才回调执行的方法
+      errorMsg: 需要显示的错误信息, 如果成功了, 没有值
+      */
+    callback(errorMsg) {
+      if (errorMsg) {
+        // 如果失败了, 提示
+        alert(errorMsg);
+      } else {
+        // 如果成功了, 跳转到成功的路由
+        this.$router.push("/addcartsuccess");
+      }
     }
   }
 };
