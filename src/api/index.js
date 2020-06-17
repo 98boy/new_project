@@ -39,6 +39,8 @@ export const reqRegister = (userInfo) =>
   ajax.post("/user/passport/register", userInfo);
 // 退出登录
 export const reqLogout = () => ajax.get("./user/passport/logout");
+// 获取订单列表
+export const reqOrders = (page, limit) => ajax(`/order/auth/${page}/${limit}`);
 // 定义访问mock接口的接口请求函数
 export const reqBanners = () => mockAjax("/banners");
 export const reqFloors = () => mockAjax("/floors");

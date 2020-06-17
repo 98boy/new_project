@@ -94,11 +94,27 @@ export default {
       try {
         // 分发注册的异步action
         await this.$store.dispatch("login", { mobile, password });
+        // 如果成功了, 跳转到首页
         this.$router.replace("/");
       } catch (error) {
         alert(error.message);
       }
     }
+  },
+  // 进入组件前调用（此时组件对象还没创建）
+  beforeRouteEnter(to, from, next) {
+    // const token = this.$store.state.user.userInfo.token;
+    next(vm => {
+      //vm就是当前组件对象，在组件对象创建后调用，
+      const token = vm.$store.state.user.userInfo.token;
+      // 已经登录强制跳转到首页
+      if (token) {
+        next("/");
+      } else {
+        // 没登录放行
+        next();
+      }
+    });
   }
 };
 </script>

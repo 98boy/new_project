@@ -6,6 +6,10 @@ import store from "./store";
 import "@/mock/mockServer"; //引入加载
 import Carousel from "./components/Carousel";
 import Pagination from "./components/Pagination";
+import "./validate";
+import * as API from "@/api";
+// 将API对象保存待Vue原型上
+Vue.prototype.$API = API;
 // 注册全局组件
 Vue.component("TypeNav", TypeNav);
 Vue.component("Carousel", Carousel);
