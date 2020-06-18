@@ -95,7 +95,12 @@ export default {
         // 分发注册的异步action
         await this.$store.dispatch("login", { mobile, password });
         // 如果成功了, 跳转到首页
-        this.$router.replace("/");
+        const redirect = this.$route.query.redirect;
+        if (redirect) {
+          this.$router.replace(redirect);
+        } else {
+          this.$router.replace("/");
+        }
       } catch (error) {
         alert(error.message);
       }

@@ -79,6 +79,16 @@
       :showPageNo="5"
       @currentChange="getOrders"
     />
+    <el-pagination
+      background
+      layout="prev, pager, next, ->, total"
+      prev-text="上一页"
+      next-text="下一页"
+      :total="total"
+      :page-size="limit"
+      :current-page.sync="page"
+      :pager-count="7"
+    ></el-pagination>
   </div>
 </template>
 

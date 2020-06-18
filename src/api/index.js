@@ -41,6 +41,23 @@ export const reqRegister = (userInfo) =>
 export const reqLogout = () => ajax.get("./user/passport/logout");
 // 获取订单列表
 export const reqOrders = (page, limit) => ajax(`/order/auth/${page}/${limit}`);
+// 获取订单校验信息
+export const reqTradeInfo = () => ajax("/order/auth/trade");
+// 提交订单
+export const reqSubmitOrder = (tradeNo, orderInfo) =>
+  ajax({
+    url: "/order/auth/submitOrder",
+    method: "POST",
+    // query: {tradeNo},  // 不可以, 在前台路由跳转时用
+    params: { tradeNo }, // 指定query参数
+    data: orderInfo,
+  });
+// 获取订单支付信息
+export const reqPayInfo = (orderId) =>
+  ajax(`/payment/weixin/createNative/${orderId}`);
+// 查询订单支付状态
+export const reqPayStatus = (orderId) =>
+  ajax(`/payment/weixin/queryPayStatus/${orderId}`);
 // 定义访问mock接口的接口请求函数
 export const reqBanners = () => mockAjax("/banners");
 export const reqFloors = () => mockAjax("/floors");

@@ -20,7 +20,7 @@ const originReplace = VueRouter.prototype.replace;
 
 // 给原型对象重新定义新的push方法
 VueRouter.prototype.push = function(location, onComplete, onAbort) {
-  console.log("push()", location, onComplete, onAbort);
+  // console.log("push()", location, onComplete, onAbort);
 
   // 1. 如果没有指定回调函数, 需要调用原本的push()后catch()来处理错误的promise
   if (!onComplete && !onAbort) {
@@ -77,7 +77,7 @@ const checkPaths = ["/trade", "/pay", "/center"]; // /paysuccess /center/myorder
 */
 router.beforeEach((to, from, next) => {
   // 监视的回调函数
-  console.log("全局beforeEach()", to, from);
+  // console.log("全局beforeEach()", to, from);
   // 得到目标路径
   const targetPath = to.path; // /center/myorder
   // 判断是目标路径是否需要检查
@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
       next();
     } else {
       // 如果没有登陆, 强制跳转到login界面
-      next("/login");
+      next("/login?redirect=" + targetPath);
     }
   } else {
     // 如果是不需要检查的, 直接放行
